@@ -88,7 +88,7 @@ Auf GitHub laufen beide bei jedem Push und Pull Request (`.github/workflows/test
 
 ## In anderen Projekten verwenden
 
-Empfohlen als **Git-Submodul** (z. B. `gcgdb/` im Projekt): Python-Werkzeuge importieren `gcgdb`
+Empfohlen als **Git-Submodul** (z. B. `gcgdb/` im Projekt, so in GCGScanner): Python-Werkzeuge importieren `gcgdb`
 direkt, Web-Apps laden `js/*.js` und `data/cards.json` ohne Build-Schritt. Eine PWA, die nur einen
 Ordner veröffentlicht, kopiert diese Dateien beim Deploy hinein. Alternativ:
 `pip install git+https://github.com/somecoder3/GCGDB` (nur Python, ohne `data/`).

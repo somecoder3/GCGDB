@@ -8,8 +8,12 @@ Webentwicklung. Überblick und Befehle: `README.md`.
 ## Stand (16. Nov. 2026)
 
 - Aufgebaut aus GCGScanner (`tools/carddb/build_carddb.py`, `export_variants()` im Dev-Server,
-  Exportformate aus `pwa/js/collection.js`), dort aber **noch nicht eingebunden**. Der Nutzer will das
-  als eigenen, späteren Schritt (z. B. als Abhängigkeit/Submodul).
+  Exportformate aus `pwa/js/collection.js`). **Seit 16. Nov. dort als Git-Submodul `gcgdb/` eingebunden**
+  (Branch `main`): Dev-Server nutzt `gcgdb.connect()` + `export.scanner_variants_json()` und liefert
+  `/gcgdb/js/*` aus; die App importiert `../gcgdb/js/lists.js` (`formatList`) und `ids.js`
+  (`GENERAL_SETS`, `setOf`); der Pages-Workflow kopiert `gcgdb/js/*.js` in die Seite, `sw.js` cacht
+  `ids.js`/`lists.js`. `tools/carddb/` und `data/cards.db` sind dort entfernt. Bei Änderungen an den
+  JS-Modulen also GCGScanners Imports, `SHELL` in `sw.js` und den Workflow im Blick behalten.
 - `data/cards.db` am 16. Nov. aus dem GCGScanner-Cache (`build/carddb-cache`, Stand 2. Nov.) neu gebaut,
   ohne Netzzugriff. Gegen die GCGScanner-DB geprüft: Karten, Varianten und Produktzuordnung gleich, bis
   auf `UNIT・TOKEN` → `UNIT TOKEN` (T-025, T-029; gewollt). `export scanner-variants` ist byte-gleich
@@ -54,9 +58,8 @@ Webentwicklung. Überblick und Befehle: `README.md`.
 
 ## Nächste Schritte (offen, mit dem Nutzer abstimmen)
 
-- GCGScanner auf GCGDB umstellen: Submodul, `tools/carddb/` und `data/cards.db` dort entfernen,
-  Dev-Server `export_variants()` → `gcgdb.export.scanner_variants_json`, `collection.js` → `formatList`,
-  `GENERAL_SETS`/`setOf` aus `js/ids.js`; Pages-Workflow muss die GCGDB-Dateien mit veröffentlichen.
+- Keine offenen Punkte aus der Einrichtung. Ideen: GCGScanner könnte statt seiner `variants.json`
+  `cards.json` (mit Typ, Effekt, Produkten) laden; `parseList()` z. B. für einen Listen-Import in der App.
 
 ## Konventionen
 
@@ -65,6 +68,7 @@ Webentwicklung. Überblick und Befehle: `README.md`.
 - Abhängigkeiten exakt pinnen und gegen die Registry prüfen; keine Version unter 2 Wochen Alter
   (auch GitHub Actions, per Commit-SHA). Python möglichst nur Standardbibliothek.
 - Neues Set: `python -m gcgdb build --details --refresh` (mit `--images`, wenn Bilder für einen
-  Index gebraucht werden), Tests laufen lassen, `data/` committen. Danach in den abhängigen Projekten
-  deren Folgeschritte (GCGScanner: Index, Bildpakete, Lesemodell neu bauen).
+  Index gebraucht werden; für GCGScanner `--cache <GCGScanner>/build/carddb-cache`, dort liest dessen
+  Dev-Server die Bilder), Tests laufen lassen, `data/` committen und pushen. Danach in den abhängigen
+  Projekten Submodul aktualisieren und deren Folgeschritte (GCGScanner: Index, Bildpakete, Lesemodell).
 - Unter Windows mit Python-Pfaden `E:/...` statt `/e/...` (Git-Bash-Pfade versteht sqlite3 nicht).
