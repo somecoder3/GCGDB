@@ -17,6 +17,10 @@ Webentwicklung. Überblick und Befehle: `README.md`.
 - Aufbau: `gcgdb/` (Python, nur Standardbibliothek: `ids`, `scraper`, `database`, `export`, `cli`),
   `js/` (ES-Module: `ids.js`, `carddb.js`, `lists.js`, `index.js`), `tests/` (unittest), `js/test/`
   (`node --test`), `data/` (committet).
+- GitHub: `https://github.com/somecoder3/GCGDB`, **öffentlich** (wie GCGScanner), Branch `main`.
+  CI `.github/workflows/tests.yml` (Python 3.11 + Node vom Runner `ubuntu-24.04`) bei Push/PR;
+  Action-SHAs dieselben wie in GCGScanners `pages.yml` (checkout v7.0.1, setup-python v7.0.0).
+  `gh` ist auf dem Rechner nicht installiert; GitHub-Oberfläche über Claude in Chrome (Nutzer angemeldet).
 
 ## Entscheidungen
 
@@ -53,7 +57,6 @@ Webentwicklung. Überblick und Befehle: `README.md`.
 - GCGScanner auf GCGDB umstellen: Submodul, `tools/carddb/` und `data/cards.db` dort entfernen,
   Dev-Server `export_variants()` → `gcgdb.export.scanner_variants_json`, `collection.js` → `formatList`,
   `GENERAL_SETS`/`setOf` aus `js/ids.js`; Pages-Workflow muss die GCGDB-Dateien mit veröffentlichen.
-- Ggf. GitHub-Remote anlegen (bisher nur lokal) und CI für die Tests (Actions per Commit-SHA pinnen).
 
 ## Konventionen
 

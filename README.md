@@ -84,9 +84,11 @@ python -m unittest discover -s tests -t .
 node --test js/test/
 ```
 
+Auf GitHub laufen beide bei jedem Push und Pull Request (`.github/workflows/tests.yml`).
+
 ## In anderen Projekten verwenden
 
 Empfohlen als **Git-Submodul** (z. B. `gcgdb/` im Projekt): Python-Werkzeuge importieren `gcgdb`
 direkt, Web-Apps laden `js/*.js` und `data/cards.json` ohne Build-Schritt. Eine PWA, die nur einen
 Ordner veröffentlicht, kopiert diese Dateien beim Deploy hinein. Alternativ:
-`pip install git+https://github.com/<owner>/GCGDB` (nur Python, ohne `data/`).
+`pip install git+https://github.com/somecoder3/GCGDB` (nur Python, ohne `data/`).
