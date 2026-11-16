@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gcgdb"
+version = "0.1.0"
+description = "Card database and tools for the Gundam Card Game"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+gcgdb = "gcgdb.cli:main"
+
+[tool.setuptools]
+packages = ["gcgdb"]

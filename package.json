@@ -1,0 +1,18 @@
+{
+  "name": "gcgdb",
+  "version": "0.1.0",
+  "description": "Card database and tools for the Gundam Card Game",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./js/index.js",
+    "./ids": "./js/ids.js",
+    "./carddb": "./js/carddb.js",
+    "./lists": "./js/lists.js",
+    "./cards.json": "./data/cards.json"
+  },
+  "files": ["js/*.js", "data/cards.json"],
+  "scripts": {
+    "test": "node --test js/test/"
+  }
+}
